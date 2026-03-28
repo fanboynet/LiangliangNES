@@ -1,7 +1,7 @@
 # LiangliangNES
 A NES emulator written by Delphi(Pascal)
-支持Mappeer0,1,2
-键盘输入，屏幕输出，声音输出 都使用SDL2库
+-- 支持Mappeer0,1,2
+-- 键盘输入，屏幕输出，声音输出 都使用SDL2库
 
 <img src="./screen/mario.png" height="200" style="margin-right: 15px;"><img src="./screen/contra.png" height="200" style="margin-right: 15px;"><img src="./screen/castle.png" height="200" style="margin-right: 15px;"><img src="./screen/tank.png" height="200" style="margin-right: 15px;">
 
