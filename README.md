@@ -10,6 +10,7 @@ A NES emulator written by Delphi(Pascal)
 
 **控制**
 - 通过修改LiangliangNES.ini自定义
+```ini
 [Video]
 Scale=2 ;屏幕大小
 Filter=linear ;SDL的屏幕过滤
@@ -22,3 +23,4 @@ Up=UP
 Down=DOWN
 Left=LEFT
 Right=RIGHT
+```
