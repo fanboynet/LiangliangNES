@@ -12,7 +12,7 @@ A NES emulator written by Delphi(Pascal)
 - **Windows(Delphi)**:dcc32 -B -U"source\core;source\frontend;source\backend_sdl" LiangliangNES.dpr
 
 **运行**
--- **例如运行Mario**: .\LiangliangNES.exe '.\Super Mario Bros. (World).nes'
+- **例如运行Mario**: .\LiangliangNES.exe '.\Super Mario Bros. (World).nes'
 
 **控制**
 - 通过修改LiangliangNES.ini自定义
