@@ -30,6 +30,23 @@ Down=DOWN
 Left=LEFT
 Right=RIGHT
 ```
+**每个核心文件的职责**
+- LiangliangNES.dpr 程序入口，启动 RunApp
+- NES.App.pas SDL 窗口、输入、音频队列、配置、主循环、截图
+- SDL2.pas SDL2 API 声明
+- NES.Console.pas 总调度器，组织 PPU x3 / APU x1 / CPU or DMA
+- NES.CPU.pas 6502/N2A03 指令执行、中断、周期控制
+- NES.PPU.pas 视频寄存器、扫描线推进、NMI、帧缓冲
+- NES.APU.pas 声道、frame counter、混音、样本缓冲
+- NES.Bus.pas CPU 地址空间解码，RAM/PPU/APU/手柄/Mapper/DMA 路由
+- NES.Cartridge.pas iNES 解析、Mapper 创建
+- NES.Mapper.pas Mapper 抽象基类
+- NES.Mapper0.pas NROM
+- NES.Mapper1.pas MMC1
+- NES.Mapper2.pas UxROM
+- NES.Controller.pas 手柄锁存与位移读出
+- NES.Types.pas 公共类型定义
+- NES.Consts.pas 常量定义
 
 **源码关系图**
 ```mermaid
