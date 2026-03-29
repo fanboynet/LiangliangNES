@@ -6,8 +6,7 @@ A NES emulator written by Delphi(Pascal)
 - **键盘输入，屏幕输出，声音输出 都使用SDL2库**
 - **跨平台支持Windows/Linux/MacOS**
 
-<img src="./screen/mario.png" height="200" style="margin-right: 15px;"><img src="./screen/contra.png" height="200" style="margin-right: 15px;"><img src="./screen/castle.png" height="200" style="margin-right: 15px;"><img src="./screen/tank.png" height="200" style="margin-right: 15px;">
-<img src="./screen/contra_linux.png" height="200" style="margin-right: 15px;">
+<img src="./screen/mario.png" height="200" style="margin-right: 15px;"><img src="./screen/contra.png" height="200" style="margin-right: 15px;"><img src="./screen/castle.png" height="200" style="margin-right: 15px;"><img src="./screen/tank.png" height="200" style="margin-right: 15px;"><br><img src="./screen/contra_linux.png" height="200" style="margin-right: 15px;">
 
 **编译**
 - **Windows(Delphi)**:dcc32 -B -U"source\core;source\frontend;source\backend_sdl" LiangliangNES.dpr
