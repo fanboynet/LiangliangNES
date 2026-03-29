@@ -7,8 +7,13 @@ unit NES.Cartridge;
 interface
 
 uses
+{$IFDEF FPC}
+  Classes,
+  SysUtils,
+{$ELSE}
   System.Classes,
   System.SysUtils,
+{$ENDIF}
   NES.Types,
   NES.Mapper;
 
@@ -128,3 +133,4 @@ begin
 end;
 
 end.
+

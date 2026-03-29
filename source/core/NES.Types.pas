@@ -7,7 +7,11 @@ unit NES.Types;
 interface
 
 uses
+{$IFDEF FPC}
+  SysUtils;
+{$ELSE}
   System.SysUtils;
+{$ENDIF}
 
 type
   UInt8 = Byte;

@@ -7,7 +7,11 @@ unit NES.Console;
 interface
 
 uses
+{$IFDEF FPC}
+  SysUtils,
+{$ELSE}
   System.SysUtils,
+{$ENDIF}
   NES.Types,
   NES.CPU,
   NES.PPU,
@@ -126,16 +130,4 @@ begin
 end;
 
 end.
-
-
-
-
-
-
-
-
-
-
-
-
 

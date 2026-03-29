@@ -7,7 +7,11 @@ unit NES.APU;
 interface
 
 uses
+{$IFDEF FPC}
+  Math,
+{$ELSE}
   System.Math,
+{$ENDIF}
   NES.Types;
 
 type
@@ -186,6 +190,8 @@ var
   Dt: Double;
   Rc: Double;
 begin
+  if Value <= 0 then
+    Value := 44100;
   FSampleRate := Value;
   FSampleStep := 1789773.0 / FSampleRate;
   Dt := 1.0 / FSampleRate;
@@ -499,6 +505,9 @@ function TAPU.MixSample: Double;
 var
   P1, P2, Tri, Noi: Integer;
   PulseMix, TndMix: Double;
+  PulseDenom: Double;
+  TndInput: Double;
+  TndDenom: Double;
 begin
   P1 := PulseRawOutput(FPulse1, 1);
   P2 := PulseRawOutput(FPulse2, 0);
@@ -508,18 +517,37 @@ begin
   if (P1 + P2) = 0 then
     PulseMix := 0
   else
-    PulseMix := 95.88 / ((8128.0 / (P1 + P2)) + 100.0);
+  begin
+    PulseDenom := (8128.0 / (P1 + P2)) + 100.0;
+    if PulseDenom <= 0 then
+      PulseMix := 0
+    else
+      PulseMix := 95.88 / PulseDenom;
+  end;
 
   if (Tri = 0) and (Noi = 0) then
     TndMix := 0
   else
-    TndMix := 159.79 / ((1.0 / ((Tri / 8227.0) + (Noi / 12241.0))) + 100.0);
+  begin
+    TndInput := (Tri / 8227.0) + (Noi / 12241.0);
+    if TndInput <= 0 then
+      TndMix := 0
+    else
+    begin
+      TndDenom := (1.0 / TndInput) + 100.0;
+      if TndDenom <= 0 then
+        TndMix := 0
+      else
+        TndMix := 159.79 / TndDenom;
+    end;
+  end;
 
   Result := PulseMix + TndMix;
+  if IsNan(Result) or IsInfinite(Result) then
+    Result := 0;
   if Result < 0 then Result := 0;
   if Result > 1 then Result := 1;
 end;
-
 procedure TAPU.PushSample(Value: SmallInt);
 begin
   if FCount >= Length(FBuffer) then
@@ -630,6 +658,8 @@ begin
   begin
     FSampleTimer := FSampleTimer - FSampleStep;
     Sample := FilterSample(MixSample);
+    if IsNan(Sample) or IsInfinite(Sample) then
+      Sample := 0;
     if Sample > 1 then Sample := 1 else if Sample < -1 then Sample := -1;
     PushSample(Round(Sample * 16000));
   end;
@@ -707,6 +737,10 @@ begin
 end;
 
 end.
+
+
+
+
 
 
 

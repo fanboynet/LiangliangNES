@@ -10,6 +10,23 @@ uses
   NES.Types;
 
 const
+{$IFDEF MSWINDOWS}
+  SDL_LibName = 'SDL2.dll';
+{$ENDIF}
+{$IFDEF LINUX}
+  SDL_LibName = 'libSDL2-2.0.so.0';
+{$ENDIF}
+{$IFDEF DARWIN}
+  SDL_LibName = 'libSDL2.dylib';
+{$ENDIF}
+{$IFNDEF MSWINDOWS}
+{$IFNDEF LINUX}
+{$IFNDEF DARWIN}
+  SDL_LibName = 'SDL2';
+{$ENDIF}
+{$ENDIF}
+{$ENDIF}
+
   SDL_INIT_VIDEO = $00000020;
   SDL_INIT_AUDIO = $00000010;
   SDL_INIT_EVENTS = $00004000;
@@ -92,31 +109,33 @@ type
       3: (padding: array[0..55] of UInt8);
   end;
 
-function SDL_Init(flags: UInt32): Integer; cdecl; external 'SDL2.dll';
-procedure SDL_Quit; cdecl; external 'SDL2.dll';
-function SDL_CreateWindow(title: PAnsiChar; x, y, w, h, flags: Integer): PSDL_Window; cdecl; external 'SDL2.dll';
-function SDL_CreateRenderer(window: PSDL_Window; index: Integer; flags: UInt32): PSDL_Renderer; cdecl; external 'SDL2.dll';
-function SDL_CreateTexture(renderer: PSDL_Renderer; format, access, w, h: Integer): PSDL_Texture; cdecl; external 'SDL2.dll';
-procedure SDL_DestroyTexture(texture: PSDL_Texture); cdecl; external 'SDL2.dll';
-procedure SDL_DestroyRenderer(renderer: PSDL_Renderer); cdecl; external 'SDL2.dll';
-procedure SDL_DestroyWindow(window: PSDL_Window); cdecl; external 'SDL2.dll';
-function SDL_PollEvent(event: Pointer): Integer; cdecl; external 'SDL2.dll';
-function SDL_UpdateTexture(texture: PSDL_Texture; rect: Pointer; pixels: Pointer; pitch: Integer): Integer; cdecl; external 'SDL2.dll';
-function SDL_RenderClear(renderer: PSDL_Renderer): Integer; cdecl; external 'SDL2.dll';
-function SDL_RenderCopy(renderer: PSDL_Renderer; texture: PSDL_Texture; srcrect, dstrect: Pointer): Integer; cdecl; external 'SDL2.dll';
-procedure SDL_RenderPresent(renderer: PSDL_Renderer); cdecl; external 'SDL2.dll';
-procedure SDL_Delay(ms: UInt32); cdecl; external 'SDL2.dll';
-function SDL_GetTicks: UInt32; cdecl; external 'SDL2.dll';
-function SDL_SetWindowTitle(window: PSDL_Window; title: PAnsiChar): Integer; cdecl; external 'SDL2.dll';
-function SDL_SetHint(name: PAnsiChar; value: PAnsiChar): Integer; cdecl; external 'SDL2.dll';
-function SDL_OpenAudioDevice(device: PAnsiChar; iscapture: Integer; desired, obtained: Pointer; allowed_changes: Integer): SDL_AudioDeviceID; cdecl; external 'SDL2.dll';
-procedure SDL_PauseAudioDevice(dev: SDL_AudioDeviceID; pause_on: Integer); cdecl; external 'SDL2.dll';
-function SDL_QueueAudio(dev: SDL_AudioDeviceID; data: Pointer; len: UInt32): Integer; cdecl; external 'SDL2.dll';
-function SDL_GetQueuedAudioSize(dev: SDL_AudioDeviceID): UInt32; cdecl; external 'SDL2.dll';
-procedure SDL_CloseAudioDevice(dev: SDL_AudioDeviceID); cdecl; external 'SDL2.dll';
+function SDL_Init(flags: UInt32): Integer; cdecl; external SDL_LibName;
+procedure SDL_Quit; cdecl; external SDL_LibName;
+function SDL_CreateWindow(title: PAnsiChar; x, y, w, h, flags: Integer): PSDL_Window; cdecl; external SDL_LibName;
+function SDL_CreateRenderer(window: PSDL_Window; index: Integer; flags: UInt32): PSDL_Renderer; cdecl; external SDL_LibName;
+function SDL_CreateTexture(renderer: PSDL_Renderer; format, access, w, h: Integer): PSDL_Texture; cdecl; external SDL_LibName;
+procedure SDL_DestroyTexture(texture: PSDL_Texture); cdecl; external SDL_LibName;
+procedure SDL_DestroyRenderer(renderer: PSDL_Renderer); cdecl; external SDL_LibName;
+procedure SDL_DestroyWindow(window: PSDL_Window); cdecl; external SDL_LibName;
+function SDL_PollEvent(event: Pointer): Integer; cdecl; external SDL_LibName;
+function SDL_UpdateTexture(texture: PSDL_Texture; rect: Pointer; pixels: Pointer; pitch: Integer): Integer; cdecl; external SDL_LibName;
+function SDL_RenderClear(renderer: PSDL_Renderer): Integer; cdecl; external SDL_LibName;
+function SDL_RenderCopy(renderer: PSDL_Renderer; texture: PSDL_Texture; srcrect, dstrect: Pointer): Integer; cdecl; external SDL_LibName;
+procedure SDL_RenderPresent(renderer: PSDL_Renderer); cdecl; external SDL_LibName;
+procedure SDL_Delay(ms: UInt32); cdecl; external SDL_LibName;
+function SDL_GetTicks: UInt32; cdecl; external SDL_LibName;
+function SDL_SetWindowTitle(window: PSDL_Window; title: PAnsiChar): Integer; cdecl; external SDL_LibName;
+function SDL_SetHint(name: PAnsiChar; value: PAnsiChar): Integer; cdecl; external SDL_LibName;
+function SDL_OpenAudioDevice(device: PAnsiChar; iscapture: Integer; desired, obtained: Pointer; allowed_changes: Integer): SDL_AudioDeviceID; cdecl; external SDL_LibName;
+procedure SDL_PauseAudioDevice(dev: SDL_AudioDeviceID; pause_on: Integer); cdecl; external SDL_LibName;
+function SDL_QueueAudio(dev: SDL_AudioDeviceID; data: Pointer; len: UInt32): Integer; cdecl; external SDL_LibName;
+function SDL_GetQueuedAudioSize(dev: SDL_AudioDeviceID): UInt32; cdecl; external SDL_LibName;
+procedure SDL_CloseAudioDevice(dev: SDL_AudioDeviceID); cdecl; external SDL_LibName;
 
 implementation
 
 end.
+
+
 
 

@@ -11,9 +11,17 @@ procedure RunApp;
 implementation
 
 uses
+{$IFDEF FPC}
+  SysUtils,
+  Classes,
+  IniFiles,
+  Math,
+{$ELSE}
   System.SysUtils,
   System.Classes,
   System.IniFiles,
+  System.Math,
+{$ENDIF}
   SDL2,
   NES.Console,
   NES.Controller,
@@ -274,6 +282,11 @@ var
   TextureBuffer: TTextureBuffer;
   ScaleQuality: AnsiString;
 begin
+{$IFDEF FPC}
+  {$IFDEF UNIX}
+  SetExceptionMask(GetExceptionMask + [exInvalidOp, exDenormalized, exZeroDivide, exOverflow, exUnderflow, exPrecision]);
+  {$ENDIF}
+{$ENDIF}
   if ParamCount < 1 then
     raise Exception.Create('Usage: LiangliangNES <rom.nes>');
 
@@ -420,4 +433,8 @@ begin
 end;
 
 end.
+
+
+
+
 
