@@ -10,8 +10,14 @@ A NES emulator written by Delphi(Pascal)
 
 **编译**
 - **Windows(Delphi)**:dcc32 -B -U"source\core;source\frontend;source\backend_sdl" LiangliangNES.dpr
-- **Linux(library require)**:sudo apt-get install -y fp-compiler libsdl2-2.0-0 libsdl2-dev fp-units-fcl build-essential libc6-dev binutils
-- **Windows/Linux/Mac(FreePascal)**:fpc -B -Fu./source/core -Fu./source/frontend  -Fu./source/backend_sdl  LiangliangNES.dpr
+- **Linux(编译环境)**:sudo apt-get install -y fp-compiler libsdl2-2.0-0 libsdl2-dev fp-units-fcl build-essential libc6-dev binutils
+- **Windows/Linux(FreePascal)**:fpc -B -Fu./source/core -Fu./source/frontend  -Fu./source/backend_sdl  LiangliangNES.dpr
+- **MacOS(编译环境)**:
+# 1. 安装命令行开发工具 (如果还没装)
+xcode-select --install
+# 2. 使用 brew 安装剩余包
+brew install fpc sdl2 binutils
+- **MacOS(编译)**:fpc -B -Fu./source/core -Fu./source/frontend -Fu./source/backend_sdl -Fl/opt/homebrew/opt/sdl2/lib -k"-lSDL2" -k"-rpath /opt/homebrew/opt/sdl2/lib" LiangliangNES.dpr
 
 **运行**
 - **例如运行Mario**: .\LiangliangNES.exe '.\Super Mario Bros. (World).nes'
