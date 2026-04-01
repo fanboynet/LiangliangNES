@@ -6,17 +6,15 @@ A NES emulator written by Delphi(Pascal)
 - **键盘输入，屏幕输出，声音输出 都使用SDL2库**
 - **跨平台支持Windows/Linux/MacOS**
 
-<img src="./screen/mario.png" height="200" style="margin-right: 15px;"><img src="./screen/contra.png" height="200" style="margin-right: 15px;"><img src="./screen/castle.png" height="200" style="margin-right: 15px;"><img src="./screen/tank.png" height="200" style="margin-right: 15px;"><br><img src="./screen/contra_linux.png" height="200" style="margin-right: 15px;">
+<img src="./screen/mario.png" height="200" style="margin-right: 15px;"><img src="./screen/contra.png" height="200" style="margin-right: 15px;"><img src="./screen/castle.png" height="200" style="margin-right: 15px;"><img src="./screen/tank.png" height="200" style="margin-right: 15px;"><br><img src="./screen/contra_linux.png" height="200" style="margin-right: 15px;"><img src="./screen/contra_mac.png" height="200" style="margin-right: 15px;">
 
 **编译**
-- **Windows(Delphi)**:dcc32 -B -U"source\core;source\frontend;source\backend_sdl" LiangliangNES.dpr
+- **Windows(Delphi编译)**:dcc32 -B -U"source\core;source\frontend;source\backend_sdl" LiangliangNES.dpr
 - **Linux(编译环境)**:sudo apt-get install -y fp-compiler libsdl2-2.0-0 libsdl2-dev fp-units-fcl build-essential libc6-dev binutils
-- **Windows/Linux(FreePascal)**:fpc -B -Fu./source/core -Fu./source/frontend  -Fu./source/backend_sdl  LiangliangNES.dpr
+- **Windows/Linux(FreePascal编译)**:fpc -B -Fu./source/core -Fu./source/frontend  -Fu./source/backend_sdl  LiangliangNES.dpr
 - **MacOS(编译环境)**:
-- 1. 安装命令行开发工具 (如果还没装)
-- xcode-select --install
-- 2. 使用 brew 安装剩余包
-- brew install fpc sdl2 binutils
+- 1. 安装命令行开发工具(需要xcode): xcode-select --install
+- 2. 使用 brew 安装剩余包(需要brew): brew install fpc sdl2 binutils
 - **MacOS(编译)**:fpc -B -Fu./source/core -Fu./source/frontend -Fu./source/backend_sdl -Fl/opt/homebrew/opt/sdl2/lib -k"-lSDL2" -k"-rpath /opt/homebrew/opt/sdl2/lib" LiangliangNES.dpr
 
 **运行**
